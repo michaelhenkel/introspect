@@ -15,6 +15,7 @@ type BgpNeighborsGetter interface {
 
 type BgpNeighborInterface interface {
 	Get(ctx context.Context, name string) (*v1alpha1.BgpNeighbor, error)
+	List(ctx context.Context) (*v1alpha1.BgpNeighbor, error)
 }
 
 type BgpNeighbors struct {
@@ -30,6 +31,19 @@ func newBgpNeighbors(c *ControlplaneV1alpha1Client) *BgpNeighbors {
 func (c *BgpNeighbors) Get(ctx context.Context, name string) (result *v1alpha1.BgpNeighbor, err error) {
 	result = &v1alpha1.BgpNeighbor{}
 	path := fmt.Sprintf("Snh_BgpNeighborReq?search_string=%s", name)
+	resultBytes, err := c.client.Get(path)
+	if err != nil {
+		return nil, err
+	}
+	if err := xml.Unmarshal(resultBytes, result); err != nil {
+		return nil, err
+	}
+	return result, err
+}
+
+func (c *BgpNeighbors) List(ctx context.Context) (result *v1alpha1.BgpNeighbor, err error) {
+	result = &v1alpha1.BgpNeighbor{}
+	path := "Snh_BgpNeighborReq"
 	resultBytes, err := c.client.Get(path)
 	if err != nil {
 		return nil, err

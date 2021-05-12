@@ -13,10 +13,23 @@ func main() {
 	client := clientset.NewClientSet(restClient)
 
 	/*
+			bgpNeighbor, err := client.Control("192.168.64.4:8083").BgpNeighbors().List(context.Background())
+			if err != nil {
+				panic(err)
+			}
+			bgpNeighbors := bgpNeighbor.Neighbors.List.BgpNeighborResp
+			for _, r := range bgpNeighbors {
+				fmt.Println(r.Peer.Text, r.State.Text)
+			}
 
-		ri, err := client.Control("192.168.64.2:8083").RoutingInstances().Get(context.Background(), "default-domain", "contrail-k8s-kubemanager-mk-default-project", "contrail-k8s-kubemanager-mk-default-podnetwork", "contrail-k8s-kubemanager-mk-default-podnetwork")
+
+		ri, err := client.Control("192.168.64.4:8083").RoutingInstances().List(context.Background())
 		if err != nil {
 			panic(err)
+		}
+		for _, r := range ri.Instances.List.ShowRoutingInstance {
+
+			fmt.Println(r.Name.Text)
 		}
 
 		result, err := yaml.Marshal(ri)
@@ -25,27 +38,25 @@ func main() {
 		}
 		fmt.Println(string(result))
 
+		for _, r := range ri.Instances.List.ShowRoutingInstance {
+
+			fmt.Println(r.Name.Text)
+		}
 	*/
 
-	bgpNeighbor, err := client.Control("192.168.64.2:8083").BgpNeighbors().Get(context.Background(), "minikube")
+	vn, err := client.Data("192.168.64.7:8085").VirtualNetworks().List(context.Background())
 	if err != nil {
 		panic(err)
 	}
-	/*
-		result, err := yaml.Marshal(bgpNeighbor)
-		if err != nil {
-			panic(err)
-		}
-		fmt.Println(string(result))
-		fmt.Println(bgpNeighbor.GetAddress())
-		fmt.Println(bgpNeighbor.GetState())
-	*/
-	bgpNeighborRoutingInstance := bgpNeighbor.Neighbors.List.BgpNeighborResp.RoutingInstances.List.BgpNeighborRoutingInstance
-	for _, r := range bgpNeighborRoutingInstance {
-		fmt.Println("blabla", r.Name.Text, r.State.Text)
+	for _, bla := range vn.VnListResp.VnList.List.VnSandeshData {
+		fmt.Println(bla)
 	}
-	fmt.Println(bgpNeighbor)
-}
 
-// Client("192.168.1.1").RoutingInstances().Get("ri")
-//clientset.ControlV1alpha1("1.1.1.1").RoutingInstances("").Get()
+	vmi, err := client.Data("192.168.64.7:8085").VirtualMachineInterfaces().List(context.Background())
+	if err != nil {
+		panic(err)
+	}
+	for _, bla := range vmi.ItfResp.ItfList.List.ItfSandeshData {
+		fmt.Println(bla)
+	}
+}

@@ -7,6 +7,7 @@ import (
 type DataV1alpha1Interface interface {
 	VirtualNetworksGetter
 	VirtualMachineInterfacesGetter
+	RoutingInstancesGetter
 }
 
 type DataplaneV1alpha1Client struct {
@@ -23,6 +24,10 @@ func (c *DataplaneV1alpha1Client) VirtualNetworks() VirtualNetworkInterface {
 
 func (c *DataplaneV1alpha1Client) VirtualMachineInterfaces() VirtualMachineInterfaceInterface {
 	return newVirtualMachineInterfaces(c)
+}
+
+func (c *DataplaneV1alpha1Client) RoutingInstances() RoutingInstanceInterface {
+	return newRoutingInstances(c)
 }
 
 func New(c rest.Interface) *DataplaneV1alpha1Client {

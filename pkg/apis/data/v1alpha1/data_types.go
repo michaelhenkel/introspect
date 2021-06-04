@@ -901,3 +901,186 @@ type VirtualNetwork struct {
 		} `xml:"more"`
 	} `xml:"Pagination"`
 }
+
+func (b *RoutingInstance) GetName() string {
+	return ""
+}
+
+type VrfSandeshData struct {
+	Text string `xml:",chardata"`
+	Name struct {
+		Text       string `xml:",chardata"`
+		Type       string `xml:"type,attr"`
+		Identifier string `xml:"identifier,attr"`
+	} `xml:"name"`
+	Ucindex struct {
+		Text       string `xml:",chardata"`
+		Type       string `xml:"type,attr"`
+		Identifier string `xml:"identifier,attr"`
+		Link       string `xml:"link,attr"`
+	} `xml:"ucindex"`
+	Mcindex struct {
+		Text       string `xml:",chardata"`
+		Type       string `xml:"type,attr"`
+		Identifier string `xml:"identifier,attr"`
+		Link       string `xml:"link,attr"`
+	} `xml:"mcindex"`
+	L2index struct {
+		Text       string `xml:",chardata"`
+		Type       string `xml:"type,attr"`
+		Identifier string `xml:"identifier,attr"`
+		Link       string `xml:"link,attr"`
+	} `xml:"l2index"`
+	Source struct {
+		Text       string `xml:",chardata"`
+		Type       string `xml:"type,attr"`
+		Identifier string `xml:"identifier,attr"`
+	} `xml:"source"`
+	Uc6index struct {
+		Text       string `xml:",chardata"`
+		Type       string `xml:"type,attr"`
+		Identifier string `xml:"identifier,attr"`
+		Link       string `xml:"link,attr"`
+	} `xml:"uc6index"`
+	Vn struct {
+		Text       string `xml:",chardata"`
+		Type       string `xml:"type,attr"`
+		Identifier string `xml:"identifier,attr"`
+		Link       string `xml:"link,attr"`
+	} `xml:"vn"`
+	TableLabel struct {
+		Text       string `xml:",chardata"`
+		Type       string `xml:"type,attr"`
+		Identifier string `xml:"identifier,attr"`
+	} `xml:"table_label"`
+	VxlanID struct {
+		Text       string `xml:",chardata"`
+		Type       string `xml:"type,attr"`
+		Identifier string `xml:"identifier,attr"`
+	} `xml:"vxlan_id"`
+	Evpnindex struct {
+		Text       string `xml:",chardata"`
+		Type       string `xml:"type,attr"`
+		Identifier string `xml:"identifier,attr"`
+		Link       string `xml:"link,attr"`
+	} `xml:"evpnindex"`
+	Brindex struct {
+		Text       string `xml:",chardata"`
+		Type       string `xml:"type,attr"`
+		Identifier string `xml:"identifier,attr"`
+		Link       string `xml:"link,attr"`
+	} `xml:"brindex"`
+	Mplsindex struct {
+		Text       string `xml:",chardata"`
+		Type       string `xml:"type,attr"`
+		Identifier string `xml:"identifier,attr"`
+		Link       string `xml:"link,attr"`
+	} `xml:"mplsindex"`
+	RD struct {
+		Text       string `xml:",chardata"`
+		Type       string `xml:"type,attr"`
+		Identifier string `xml:"identifier,attr"`
+	} `xml:"RD"`
+	MacAgingTime struct {
+		Text       string `xml:",chardata"`
+		Type       string `xml:"type,attr"`
+		Identifier string `xml:"identifier,attr"`
+	} `xml:"mac_aging_time"`
+	Layer2ControlWord struct {
+		Text       string `xml:",chardata"`
+		Type       string `xml:"type,attr"`
+		Identifier string `xml:"identifier,attr"`
+	} `xml:"layer2_control_word"`
+	ForwardingVrf struct {
+		Text       string `xml:",chardata"`
+		Type       string `xml:"type,attr"`
+		Identifier string `xml:"identifier,attr"`
+	} `xml:"forwarding_vrf"`
+	HbfRintf struct {
+		Text       string `xml:",chardata"`
+		Type       string `xml:"type,attr"`
+		Identifier string `xml:"identifier,attr"`
+	} `xml:"hbf_rintf"`
+	HbfLintf struct {
+		Text       string `xml:",chardata"`
+		Type       string `xml:"type,attr"`
+		Identifier string `xml:"identifier,attr"`
+	} `xml:"hbf_lintf"`
+}
+
+type RoutingInstance struct {
+	XMLName     xml.Name `xml:"__VrfListResp_list"`
+	Text        string   `xml:",chardata"`
+	Type        string   `xml:"type,attr"`
+	VrfListResp struct {
+		Text    string `xml:",chardata"`
+		Type    string `xml:"type,attr"`
+		VrfList struct {
+			Text       string `xml:",chardata"`
+			Type       string `xml:"type,attr"`
+			Identifier string `xml:"identifier,attr"`
+			List       struct {
+				Text           string           `xml:",chardata"`
+				Type           string           `xml:"type,attr"`
+				Size           string           `xml:"size,attr"`
+				VrfSandeshData []VrfSandeshData `xml:"VrfSandeshData"`
+			} `xml:"list"`
+		} `xml:"vrf_list"`
+		More struct {
+			Text       string `xml:",chardata"`
+			Type       string `xml:"type,attr"`
+			Identifier string `xml:"identifier,attr"`
+		} `xml:"more"`
+	} `xml:"VrfListResp"`
+	Pagination struct {
+		Text string `xml:",chardata"`
+		Type string `xml:"type,attr"`
+		Req  struct {
+			Text        string `xml:",chardata"`
+			Type        string `xml:"type,attr"`
+			Identifier  string `xml:"identifier,attr"`
+			PageReqData struct {
+				Text     string `xml:",chardata"`
+				PrevPage struct {
+					Text       string `xml:",chardata"`
+					Type       string `xml:"type,attr"`
+					Identifier string `xml:"identifier,attr"`
+					Link       string `xml:"link,attr"`
+				} `xml:"prev_page"`
+				NextPage struct {
+					Text       string `xml:",chardata"`
+					Type       string `xml:"type,attr"`
+					Identifier string `xml:"identifier,attr"`
+					Link       string `xml:"link,attr"`
+				} `xml:"next_page"`
+				FirstPage struct {
+					Text       string `xml:",chardata"`
+					Type       string `xml:"type,attr"`
+					Identifier string `xml:"identifier,attr"`
+					Link       string `xml:"link,attr"`
+				} `xml:"first_page"`
+				All struct {
+					Text       string `xml:",chardata"`
+					Type       string `xml:"type,attr"`
+					Identifier string `xml:"identifier,attr"`
+					Link       string `xml:"link,attr"`
+				} `xml:"all"`
+				TableSize struct {
+					Text       string `xml:",chardata"`
+					Type       string `xml:"type,attr"`
+					Identifier string `xml:"identifier,attr"`
+				} `xml:"table_size"`
+				Entries struct {
+					Text       string `xml:",chardata"`
+					Type       string `xml:"type,attr"`
+					Identifier string `xml:"identifier,attr"`
+				} `xml:"entries"`
+			} `xml:"PageReqData"`
+		} `xml:"req"`
+		More struct {
+			Text       string `xml:",chardata"`
+			Type       string `xml:"type,attr"`
+			Identifier string `xml:"identifier,attr"`
+		} `xml:"more"`
+	} `xml:"Pagination"`
+}
